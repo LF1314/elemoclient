@@ -4,9 +4,9 @@
     <div>
        发送数据
        <p>{{msg}}</p>
+       <star :size = 48 :course = 4></star>
     </div>
 </template>
-
 <script>
 export default {
   name: "test",
@@ -15,17 +15,18 @@ export default {
       msg: ""
     };
   },
+  components: {
+    star: () => import("../start/start")
+  },
   methods: {
     sendseller() {
       this.$axios.get("/seller", { id: "11323123" }).then(res => {
-        console.log(res.data)
+        console.log(res.data);
         this.msg = res.data.msg;
       });
     }
   },
-  created() {
-    this.sendseller();
-  }
+  created() {}
 };
 </script>
 

@@ -53,9 +53,8 @@ export default {
 .tab-item a {
   display: block;
   font-size: 14px;
-  color: rgb(77, 85, 93);
 }
-.tab-item a:active {
+.tab-item .router-link-active {
   color: rgb(240, 20, 20);
 }
 .tabar {

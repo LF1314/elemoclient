@@ -24,7 +24,14 @@ export default new Router({
       component: () =>
         import('@/components/ratings/ratings')
 
+    },
+    {
+      path: '/test',
+      component: () =>
+        import('@/components/test/senddata')
+
     }
+
   ]
 
 })

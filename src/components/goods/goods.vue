@@ -31,6 +31,9 @@
                     </div>
 
                  </div>
+                 <div class="cartwraper">
+                  <cartcontrl :food ='food'></cartcontrl>
+                 </div>
 
                </li>
              </ul>
@@ -39,13 +42,15 @@
 
        </div>
        <div>
-         <shopcart></shopcart>
+         <shopcart :selectfoods ='selectfood'></shopcart>
        </div>
     </div>
 </template>
 <script>
 import BScroll from "better-scroll";
-import shopcart from '../shortcart/shopcart'
+import cartcontrl from "../cartcontrl/cartcontrl";
+
+import shopcart from "../shortcart/shopcart";
 export default {
   name: "goods",
   data() {
@@ -56,8 +61,9 @@ export default {
       classmap: ["decrease", "discount", "special", "guarantee", "invoice"]
     };
   },
-  components:{
-    shopcart
+  components: {
+    shopcart,
+    cartcontrl
   },
   computed: {
     currentindex() {
@@ -68,6 +74,17 @@ export default {
           return i;
         }
       }
+    },
+    selectfood(){
+      let arr = []
+      this.goods.forEach(item=>{
+          item.foods.forEach(food=>{
+            if(food.count){
+              arr.push(food)
+            }
+          })
+      })
+      return arr
     }
   },
   methods: {
@@ -91,6 +108,7 @@ export default {
         click: true
       });
       this.foodscroll = new BScroll(foodswraper, {
+        click: true,
         /**
          * 1 滚动的时候会派发scroll事件，会截流。
          * 2 滚动的时候实时派发scroll事件，不会截流。
@@ -209,7 +227,7 @@ export default {
       padding-bottom: 18px;
       font-size: 0px;
       display: flex;
-
+      position: relative;
       border-bottom: 1px solid rgba(7, 17, 27, 0.1);
       .foodicon {
         display: inline-block;
@@ -257,6 +275,13 @@ export default {
             text-decoration: line-through;
           }
         }
+      }
+      .cartwraper {
+        position: absolute;
+        right: 0;
+        bottom: 6px;
+        width: 72px;
+        text-align: right;
       }
     }
   }
